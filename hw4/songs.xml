@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<?xml-stylesheet type="text/css" href="songs.css" ?>
+<songs>
+    <heading> Our Cover Band </heading>
+    <song> 
+        <name> The Last Day</name>
+        <artist> Moby </artist>
+        <musicGenre> Rock/Downtempo </musicGenre>
+        <yearReleased> 2013 </yearReleased>
+    </song>
+    <song> 
+        <name> Iron Sky </name>
+        <artist> Paolo Nutini </artist>
+        <musicGenre> Art Rock/ Psychedelic Rock</musicGenre>
+        <yearReleased> 2014 </yearReleased>
+    </song>
+    <song> 
+        <name> Summer Son </name>
+        <artist> Texas </artist>
+        <musicGenre> Dance-rock </musicGenre>
+        <yearReleased> 1999 </yearReleased>
+    </song>
+    <song> 
+        <name> Candy </name>
+        <artist> Paolo Nutini </artist>
+        <musicGenre> Folk Rock </musicGenre>
+        <yearReleased> 2009 </yearReleased>
+    </song>
+    <song> 
+        <name> Dark Paradise </name>
+        <artist> Lana Del Rey </artist>
+        <musicGenre> Trip hop </musicGenre>
+        <yearReleased> 2013 </yearReleased>
+    </song>
+    <song> 
+        <name> Silver Lining </name>
+        <artist> Mt. Joy </artist>
+        <musicGenre> Alternative/Indie </musicGenre>
+        <yearReleased> 2018 </yearReleased>
+    </song>
+    <song> 
+        <name> Let's fall in love for the night</name>
+        <artist> FINNEAS </artist>
+        <musicGenre> Pop </musicGenre>
+        <yearReleased> 2018 </yearReleased>
+    </song>
+    <song> 
+        <name> Fix You</name>
+        <artist> Coldplay  </artist>
+        <musicGenre> Alternative Rock </musicGenre>
+        <yearReleased> 2005 </yearReleased>
+    </song>
+    <song> 
+        <name> everything i wanted </name>
+        <artist> Billie Eilish </artist>
+        <musicGenre> Alternative pop </musicGenre>
+        <yearReleased> 2019 </yearReleased>
+    </song>
+    <song> 
+        <name> She's a rainbow </name>
+        <artist> The Rolling Stones </artist>
+        <musicGenre> Psychedelic Rock </musicGenre>
+        <yearReleased> 1967 </yearReleased>
+    </song>
+</songs>
+
+
+
+

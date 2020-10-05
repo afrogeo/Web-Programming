@@ -1,0 +1,23 @@
+songs {
+    color: rgb(255, 255, 255);
+    background-color: rgb(114, 97, 77);
+    width: 100%;
+}
+heading {
+    color:  rgb(114, 97, 77);
+    margin-bottom: 40px;
+    font-size: 40px;
+    background-color: rgb(229, 216, 160);
+}
+heading, name, artist, musicGenre, yearReleased {
+    display: block;
+    text-align: center;
+}
+name {
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(229, 216, 160);
+}
+yearReleased{
+    margin-bottom: 10px;
+}
