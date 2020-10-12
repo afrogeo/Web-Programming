@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        
+    </head>
+
+    <body>
+        
+        <script language="javascript">
+            var fiveStr, luckyBall;
+            
+            
+            fiveStr = prompt("Enter 5 winning numbers separated by a space","28 30 31 42 43");
+            luckyStr = prompt("Enter lucky ball number", "13")
+            
+            
+            // Convert string in array of integers
+            var fiveInt = fiveStr.split(' ').map(function(item) {
+                return parseInt(item, 10);
+            });
+            // Sort array of integers
+            fiveInt.sort(function(a,b){
+                return a - b;
+            });
+            
+            // Convert lucky number to integer
+            var luckyInt = parseInt(luckyStr);
+            var randomFive = [];
+
+            // Make 5 random numbers from 1 to 48
+            while (randomFive.length < 6) {
+                var r = Math.floor(Math.random() * 48) + 1;
+                if(randomFive.indexOf(r) === -1) randomFive.push(r); 
+            }
+            //randomFive = Array.from({length: 5}, () => Math.floor(Math.random() * 48) + 1);
+            
+            // Make random lucky ball number
+            randomOne = Math.floor(Math.random() * 18) + 1;
+            randomFive.sort(function(a,b){
+                return a - b;
+            });
+
+            // Keep track of the number of matched numbers
+            var matchFive = 0;
+            var j = 0, i = j;
+            while (i < 5 && j < 5) {
+                if (fiveInt[i] < randomFive[j])
+                    i++;
+                else if (randomFive[j] < fiveInt[i]) 
+                    j++;
+                else {
+                    matchFive++;
+                    i++;
+                }
+            }
+            var ballMatched = false;
+            if (luckyInt == randomOne)
+                ballMatched = true;
+            
+        
+            document.write("The quick pick numbers are: " + fiveStr + "<br />");
+            document.write("The lucky ball number is " + luckyInt + "<br />");
+            document.write("<br />");
+            document.write("The winning numbers are: ");
+            for (var i = 0; i < 5; i++) {
+                document.write(randomFive[i] + " ");
+            }
+            document.write("<br />");
+            document.write("The lucky ball number is " + randomOne + "<br />");
+            document.write("<br />");
+            document.write("<br />");
+            
+            
+
+            if (ballMatched) {
+                document.write("You win! Your payout is: $");
+                if (matchFive > 0) {
+                    if (matchFive == 1) {
+                        document.write("6 <br />");
+                    } else if (matchFive == 2) {
+                        document.write("25 <br />");
+                    } else if (matchFive == 3) {
+                        document.write("150 <br />");
+                    } else if (matchFive == 4) {
+                        document.write("5,000 <br />");
+                    } else if (matchFive == 5) {
+                        document.write("7,000 a WEEK for LIFE <br />");
+                    }
+                } else {
+                    document.write("4 <br />");
+                }
+            } else if (matchFive > 1) {
+                    document.write("You win! Your payout is: $");
+                    if (matchFive == 2) {
+                        document.write("3 <br />");
+                    } else if (matchFive == 3) {
+                        document.write("20 <br />");
+                    } else if (matchFive == 4) {
+                        document.write("200 <br />");
+                    } else if (matchFive == 5) {
+                        document.write("25,000 a YEAR for LIFE <br />");
+                    }
+            } else {
+                    document.write("Sorry, no matches! Payout is 0");
+            }
+            
+
+
+            
+        </script>
+    </body>
+</html>
