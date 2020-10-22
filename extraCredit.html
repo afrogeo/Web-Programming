@@ -1,0 +1,66 @@
+<html>
+    <style>
+        .txtbox-left{
+            display: block;
+            float: left;
+            height: 30px;
+            width: 150px;
+            margin-top: 50px;
+        }
+        .txtbox-right{
+            display: block;
+            float: left;
+            height: 30px;
+            width: 150px;
+            margin-top: 50px;
+        }
+        .btn {
+            display: block;
+            float: left;
+            height: 30px;
+            margin-right: 50px;
+            margin-top: 50px;
+            margin-left: 50px;
+        }
+    </style>
+<head>
+<meta charset="utf-8">
+<title> Extra Credit Exercise</title>
+	<script language="javascript">
+	function testit()
+	{
+		myBtn = document.getElementById("btn1");
+        txtLeft = document.getElementById("txtleft");
+		txtRight = document.getElementById("txtright");
+        
+		if (myBtn.value == "->")
+		{
+            var right = txtRight.value;
+			txtRight.value = txtLeft.value;
+            txtLeft.value = right;
+			myBtn.value = "<-";
+		}
+		else
+		{
+			var right = txtRight.value;
+			txtRight.value = txtLeft.value;
+            txtLeft.value = right;
+			myBtn.value = "->";
+		}
+	}
+	
+	</script>
+</head>
+
+<body>
+	<input type="text" name="txtleft" id="txtleft" class="txtbox-left" >
+    
+    <input type="button" class="btn" onclick="testit()"
+		   id= "btn1"
+           value = "->">
+           
+    <input type="text" name="txtright" id="txtright" class="txtbox-right">
+    
+    
+</body>
+</html>
