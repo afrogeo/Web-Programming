@@ -1,0 +1,144 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>JSON hw9</title>
+	<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
+	<!--script language="javascript" src="animals.json"></script-->
+	<script>
+		
+		function loadFile() 
+		{
+			//Step 1: Make instance of request object
+			req = new XMLHttpRequest();
+			console.log("1 - request object created");
+ 
+			// Step 2: Set URL for the AJAX request to be the JSON file
+ 
+ 			//(HW Part 1) JSON was created in separate file and uploaded to GitHub pages
+			request.open("GET", "https://afrogeo.github.io/comp20/hw9/songs.json", true);
+			console.log("2 - opened request file");
+ 
+			// Step 3: set up event handler/callback
+
+			request.onreadystatechange = function() 
+			{
+				console.log("3 - readystatechange event fired.");
+ 
+				if (request.readyState == 4 && request.status == 200) 
+				{
+
+					// Step 5: wait for done + success
+					result = req.responseText;
+
+					//(HW Part 2) Display all data on page as a raw string
+					document.getElementById("data").innerHTML=result;
+					document.getElementById("data").value=result;
+
+					//(HW Part 3) Display all data in a user friendly format
+					//Divide into separate divs based on genre (for filtering purposes) 
+					songs = JSON.parse(result);
+					
+					strHTMLSoul = "<ul>";
+					strHTMLRock = "<ul>";
+					strHTMLDisco = "<ul>";
+					songs.forEach(function(song)
+					{
+						if(song.Genre == "Soul")
+						{
+							strHTMLSoul += "<li>" + "<strong>" + song.Title + "</strong>" + "</li>" + "<li>" + "Artist: " + song.Artist + "</li>" + "<li>" + "Genre: " + song.Genre + "</li>" + "<li>" + "Released: " + song.Release + "</li>" + "<br>";	
+						}	
+						else if(song.Genre == "Rock")
+						{
+							strHTMLRock += "<li>" + "<strong>" + song.Title + "</strong>" + "</li>" + "<li>" + "Artist: " + song.Artist + "</li>" + "<li>" + "Genre: " + song.Genre + "</li>" + "<li>" + "Released: " + song.Release + "</li>" + "<br>";	
+						}
+						else if(song.Genre == "Disco")
+						{
+							strHTMLDisco += "<li>" + "<strong>" + song.Title + "</strong>" + "</li>" + "<li>" + "Artist: " + song.Artist + "</li>" + "<li>" + "Genre: " + song.Genre + "</li>" + "<li>" + "Released: " + song.Release + "</li>" + "<br>";
+						}
+						else
+						{
+							alert("Div parsing error!");
+						}		
+					})
+					strHTMLSoul += "</ul>";
+					strHTMLRock += "</ul>";
+					strHTMLDisco += "</ul>"; 
+					document.getElementById("genreSoul").innerHTML =strHTMLSoul; 
+					document.getElementById("genreRock").innerHTML =strHTMLRock; 
+					document.getElementById("genreDisco").innerHTML =strHTMLDisco; 
+				}
+				else if (request.readyState == 4 && request.status != 200) 
+				{
+					document.getElementById("data").innerHTML = "Something is wrong! Check logs";
+				}
+
+				else if (request.readyState == 3) 
+				{
+					document.getElementById("data").innerHTML = "Too soon! Try again";
+				}
+
+			}
+		// Step 4: fire off the HTTP request
+			request.send();
+			console.log("4 - Request sent");
+		}
+	</script>
+</head>
+
+
+<body onload="loadFile()">
+
+	<h1>JSON Set List</h1>
+	<div id="data">Loading...</div>
+	<!-- <div id="genreSoul"></div>
+	<div id="genreRock"></div>
+	<div id="genreDisco"></div>
+	<form> -->
+		<!-- (HW Part 4) Form with select element allowing user to choose genre
+		+ button for filtering -->
+		<!-- <label for="genres">Choose a genre:</label>
+		<select id="genres" name="genres">
+  			<option value="soul">Soul</option>
+ 			<option value="rock">Rock</option>
+  			<option value="disco">Disco</option>
+		</select>
+		<button type="button" onclick="filter()">Filter</button>
+	</form> -->
+
+	<!-- <script>
+		//This function filters the data by hiding the two divs that do not 
+		//correspond to the user's choice of genre and showing only the div that 
+		//corresponds to the correct genre
+		function filter()
+		{
+			$(document).ready(function()
+			{
+				if($('select[name="genres"]').val() == "soul")
+				{
+					$("#genreRock").hide();
+					$("#genreDisco").hide();
+					$("#genreSoul").show();
+				}
+				else if($('select[name="genres"]').val() == "rock")
+				{
+					$("#genreSoul").hide();
+					$("#genreDisco").hide();
+					$("#genreRock").show();
+				}
+				else if($('select[name="genres"]').val() == "disco")
+				{
+					$("#genreSoul").hide();
+					$("#genreRock").hide();
+					$("#genreDisco").show();
+				}
+				else
+				{
+					alert("filter error!");
+				}
+			});
+		}
+	</script> -->
+</body>
+</html>
+	

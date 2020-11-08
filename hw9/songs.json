@@ -1,0 +1,92 @@
+[
+    {
+        "title":"Fix You",
+        "artist":"Coldplay",
+        "genres": [
+                "Alternative Rock",
+                "Rock",
+                "Post-Britpop"
+            ],
+        "year": "2005"
+    },
+    {
+        "title":"The Last Day",
+        "artist":"Moby",
+        "genres": [
+                "Dance/Electronic",
+                "Downtempo"
+            ],
+        "year": "2013"
+    },
+    {
+        "title":"Iron Sky",
+        "artist":"Paolo Nutini",
+        "genres": [
+                "Art rock",
+                "Pop"
+            ],
+        "year": "2014"
+    },
+    {
+        "title":"Summer Son",
+        "artist":"Texas",
+        "genres": [
+                "Pop Rock",
+                "Pop"
+            ],
+        "year": "1999"
+    },
+    {
+        "title":"Candy",
+        "artist":"Paolo Nutini",
+        "genres": [
+                "Folk Rock"
+            ],
+        "year": "2009"
+    },
+    {
+        "title":"Dark Paradise",
+        "artist":"Lana Del Rey",
+        "genres": [
+                "Alternative/Indie",
+                "Pop"
+            ],
+        "year": "2013"
+    },
+    {
+        "title":"Silver Lining",
+        "artist":"Mt. Joy",
+        "genres": [
+                "Alternative/Indie",
+                "Indie Rock"
+            ],
+        "year": "2018"
+    },
+    {
+        "title":"Let's fall in love for the night",
+        "artist":"FINNEAS",
+        "genres": [
+                "Pop",
+                "Alternative/Indie"
+            ],
+        "year": "2018"
+    },
+    {
+        "title":"everything i wanted",
+        "artist":"Billie Eilish",
+        "genres": [
+                "Alternative Pop"
+            ],
+        "year": "2019"
+    },
+    {
+        "title":"She's a rainbow",
+        "artist":"The Rolling Stones",
+        "genres": [
+                "Psychedelic Rock",
+                "Rock",
+                "Pop"
+            ],
+        "year": "1967"
+    }
+]
