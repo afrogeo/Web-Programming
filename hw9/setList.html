@@ -2,86 +2,171 @@
 <html>
 <head>
 <meta charset="utf-8">
+<style>
+    body {
+		background-color: rgb(229, 216, 160);
+		padding: 5%;
+	}
+    h1, th, strong, .title {
+    color:  rgb(114, 97, 77);
+    margin-bottom: 40px;
+    font-size:large;
+    background-color: rgb(229, 216, 160);
+    }
+    table {
+        display: table;
+        width: 100%;
+    }
+    table tr{
+        display: table-cell;
+        width: 20%;
+    }
+    table tr td {
+        display: block;
+    }
+    
+</style>
 <title>JSON hw9</title>
 	<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="   crossorigin="anonymous"></script>
-	<!--script language="javascript" src="animals.json"></script-->
 	<script>
 		
 		function loadFile() 
 		{
-			//Step 1: Make instance of request object
+			// Create request object
 			req = new XMLHttpRequest();
-			console.log("1 - request object created");
+			console.log("1: request object created");
  
-			// Step 2: Set URL for the AJAX request to be the JSON file
+			// Open JSON file
+			req.open("GET", "https://afrogeo.github.io/comp20/hw9/songs.json", true);
+			console.log("2: Opened file");
  
- 			//(HW Part 1) JSON was created in separate file and uploaded to GitHub pages
-			request.open("GET", "https://afrogeo.github.io/comp20/hw9/songs.json", true);
-			console.log("2 - opened request file");
- 
-			// Step 3: set up event handler/callback
-
-			request.onreadystatechange = function() 
+			// Event handler
+			req.onreadystatechange = function() 
 			{
-				console.log("3 - readystatechange event fired.");
- 
-				if (request.readyState == 4 && request.status == 200) 
+				console.log("3: readystatechange done");
+				if (req.readyState == 4 && req.status == 200) 
 				{
-
-					// Step 5: wait for done + success
 					result = req.responseText;
+					// Part 2: Display data on page as raw string 
+					document.getElementById("data").innerHTML = result;
+					document.getElementById("data").value = result;
 
-					//(HW Part 2) Display all data on page as a raw string
-					document.getElementById("data").innerHTML=result;
-					document.getElementById("data").value=result;
-
-					//(HW Part 3) Display all data in a user friendly format
-					//Divide into separate divs based on genre (for filtering purposes) 
+					// Part 3: User friendly display
 					songs = JSON.parse(result);
 					
-					strHTMLSoul = "<ul>";
-					strHTMLRock = "<ul>";
-					strHTMLDisco = "<ul>";
+					popHTML = "";
+					rockHTML = "";
+					danceHTML = "";
+                    alternativeHTML = "";
+                    indieHTML = "";
+                    allSongs = "<br><br><table>";
+                    count = 0;
+
+                    // arrange songs depending on genre
 					songs.forEach(function(song)
-					{
-						if(song.Genre == "Soul")
-						{
-							strHTMLSoul += "<li>" + "<strong>" + song.Title + "</strong>" + "</li>" + "<li>" + "Artist: " + song.Artist + "</li>" + "<li>" + "Genre: " + song.Genre + "</li>" + "<li>" + "Released: " + song.Release + "</li>" + "<br>";	
-						}	
-						else if(song.Genre == "Rock")
-						{
-							strHTMLRock += "<li>" + "<strong>" + song.Title + "</strong>" + "</li>" + "<li>" + "Artist: " + song.Artist + "</li>" + "<li>" + "Genre: " + song.Genre + "</li>" + "<li>" + "Released: " + song.Release + "</li>" + "<br>";	
-						}
-						else if(song.Genre == "Disco")
-						{
-							strHTMLDisco += "<li>" + "<strong>" + song.Title + "</strong>" + "</li>" + "<li>" + "Artist: " + song.Artist + "</li>" + "<li>" + "Genre: " + song.Genre + "</li>" + "<li>" + "Released: " + song.Release + "</li>" + "<br>";
-						}
-						else
-						{
-							alert("Div parsing error!");
-						}		
+					{   
+                        count++;
+                        len = song.genres.length;
+                        genresText = "";
+                        // keep track of all genres of a song
+                        for (i = 0; i < len; i++) 
+                        {
+                            genresText += song.genres[i];
+                            if (i != len - 1) {
+                                genresText += ", ";
+                            }
+                        }
+                        if (count == 6) {
+                            allSongs += "</table> <br> <br> <table>"
+                        }
+                        
+                        allSongs += "<tr>" + "<th>" + "<strong>" + song.title + "</strong>" + "</th>" + 
+                        "<td>" + "Artist: " + song.artist + "</td>" +
+                        "<td>" + "Genres: " + genresText + "</td>" +
+                        "<td>" + "Released " + song.year + "</td>" + "</tr>";
+                     
+                        for (i = 0; i < len; i++) 
+                        {
+                            if (song.genres[i] == "Alternative Rock")
+                            {
+                                rockHTML += "<br>" + "<strong>" + song.title + "</strong>" + "<br>" + "Artist: " + song.artist + "<br>" + 
+                                "Genre: " + genresText + "<br>" + "Released " + song.year + "<br>";
+                                alternativeHTML += "<br>" + "<strong>" + song.title + "</strong>"  + "<br>" + "Artist: " + song.artist + "<br>" + 
+                                "Genre: " + genresText + "<br>" + "Released " + song.year  + "<br>";
+                            }	
+                            else if (song.genres[i] == "Rock")
+                            {
+                                rockHTML += "<br>"+ "<strong>" + song.title + "</strong>" + "<br>" + "Artist: " + song.artist + "<br>" + 
+                                "Genre: " + genresText + "<br>" + "Released " + song.year + "<br>" ;
+                            }
+                            else if (song.genres[i] == "Pop")
+                            {
+                                popHTML += "<br>" + "<strong>" + song.title + "</strong>" + "<br>" + "Artist: " + song.artist  + "<br>" + 
+                                "Genre: " + genresText + "<br>" + "Released " + song.year + "<br>";						
+                            }
+                            else if (song.genres[i] == "Dance/Electronic")
+                            {
+                                danceHTML += "<br>" + "<strong>" + song.title + "</strong>"  + "<br>" + "Artist: " + song.artist  + "<br>" + 
+                                "Genre: " + genresText + "<br>" + "Released: " + song.year + "<br>";						
+                            }
+                            else if (song.genres[i] == "Folk Rock")
+                            {
+                                rockHTML += "<br>" + "<strong>" + song.title + "</strong>"+ "<br>" + "Artist: " + song.artist + "<br>" + 
+                                "Genre: " + genresText +"<br>" + "Released: " + song.year + "<br>";						
+                            }
+                            else if (song.genres[i] == "Alternative/Indie")
+                            {
+                                alternativeHTML += "<br>" + "<strong>" + song.title + "</strong>"+ "<br>" + "Artist: " + song.artist + "<br>" + 
+                                "Genre: " + genresText +"<br>" + "Released: " + song.year + "<br>";					
+                                indieHTML += "<br>" + "<strong>" + song.title + "</strong>"+ "<br>" + "Artist: " + song.artist + "<br>" + 
+                                "Genre: " + genresText +"<br>" + "Released: " + song.year + "<br>";					
+                            }
+                            else if (song.genres[i] == "Alternative Pop")
+                            {
+                                popHTML += "<br>" + "<strong>" + song.title + "</strong>"+ "<br>" + "Artist: " + song.artist + "<br>" + 
+                                "Genre: " + genresText +"<br>" + "Released: " + song.year + "<br>";					
+                                alternativeHTML += "<br>" + "<strong>" + song.title + "</strong>"+ "<br>" + "Artist: " + song.artist + "<br>" + 
+                                "Genre: " + genresText +"<br>" + "Released: " + song.year + "<br>";					
+                            }
+                            else
+                            {
+                                alert("Genres Error!");
+                            }		    
+                        }
+                        
+						
 					})
-					strHTMLSoul += "</ul>";
-					strHTMLRock += "</ul>";
-					strHTMLDisco += "</ul>"; 
-					document.getElementById("genreSoul").innerHTML =strHTMLSoul; 
-					document.getElementById("genreRock").innerHTML =strHTMLRock; 
-					document.getElementById("genreDisco").innerHTML =strHTMLDisco; 
+                    allSongs += "</table> <br> <br>"
+                    document.getElementById("allSongs").innerHTML = allSongs; 
+
+                    // initially hide all categories
+                    $("#gPop").hide();
+					$("#gRock").hide();
+					$("#gDance").hide();
+                    $("#gAlternative").hide();
+					$("#gIndie").hide();
+
+					document.getElementById("gPop").innerHTML = popHTML; 
+					document.getElementById("gRock").innerHTML = rockHTML; 
+					document.getElementById("gDance").innerHTML = danceHTML; 
+                    document.getElementById("gAlternative").innerHTML = alternativeHTML; 
+					document.getElementById("gIndie").innerHTML = indieHTML; 
 				}
-				else if (request.readyState == 4 && request.status != 200) 
+				else if (req.readyState == 4 && req.status != 200) 
 				{
-					document.getElementById("data").innerHTML = "Something is wrong! Check logs";
+					document.getElementById("data").innerHTML = "Whoops, something went terribly wrong!";
 				}
 
-				else if (request.readyState == 3) 
+				else if (req.readyState == 3) 
 				{
+                    console.log("4: ready state 3- request received, data being sent");
 					document.getElementById("data").innerHTML = "Too soon! Try again";
 				}
 
 			}
-		// Step 4: fire off the HTTP request
-			request.send();
-			console.log("4 - Request sent");
+		    // Step 4: fire off the HTTP request
+			req.send();
+			console.log("5: Request sent");
 		}
 	</script>
 </head>
@@ -89,48 +174,80 @@
 
 <body onload="loadFile()">
 
-	<h1>JSON Set List</h1>
-	<div id="data">Loading...</div>
-	<!-- <div id="genreSoul"></div>
-	<div id="genreRock"></div>
-	<div id="genreDisco"></div>
-	<form> -->
-		<!-- (HW Part 4) Form with select element allowing user to choose genre
-		+ button for filtering -->
-		<!-- <label for="genres">Choose a genre:</label>
+	<h1 style="font-size: 35px; text-align: center;">JSON Song List</h1>
+    <div id = "data">Loading...</div>
+    <div id = "allSongs"></div>
+	
+	<form style="margin-top: 20px; text-align: center;">
+		<!-- Form to select genre to filter -->
+		<label for="genres"> Choose genre: </label>
 		<select id="genres" name="genres">
-  			<option value="soul">Soul</option>
- 			<option value="rock">Rock</option>
-  			<option value="disco">Disco</option>
+  			<option value="rock"> Rock </option>
+ 			<option value="pop"> Pop </option>
+            <option value="dance"> Dance </option>
+            <option value="alternative"> Aleternative </option>
+            <option value="indie"> Indie </option>
 		</select>
 		<button type="button" onclick="filter()">Filter</button>
-	</form> -->
-
-	<!-- <script>
-		//This function filters the data by hiding the two divs that do not 
-		//correspond to the user's choice of genre and showing only the div that 
-		//corresponds to the correct genre
+    </form>
+    <div class = "title" id ="titleFilter" style="text-align: center; font-weight: bold; margin-top: 20px; font-size: 25px;" ></div>
+    <div id = "gPop"></div>
+	<div id = "gRock"></div>
+    <div id = "gDance"></div>
+    <div id = "gAlternative"></div>
+	<div id = "gIndie"></div>
+	<script>
+		
+        // filter function for genre chosen
 		function filter()
 		{
 			$(document).ready(function()
 			{
-				if($('select[name="genres"]').val() == "soul")
+                $("#allSongs").hide();
+				if($('select[name="genres"]').val() == "pop")
 				{
-					$("#genreRock").hide();
-					$("#genreDisco").hide();
-					$("#genreSoul").show();
+                    document.getElementById("titleFilter").innerHTML = "Pop Songs:";
+					$("#gPop").show();
+					$("#gRock").hide();
+					$("#gDance").hide();
+                    $("#gAlternative").hide();
+					$("#gIndie").hide();
 				}
 				else if($('select[name="genres"]').val() == "rock")
 				{
-					$("#genreSoul").hide();
-					$("#genreDisco").hide();
-					$("#genreRock").show();
+                    document.getElementById("titleFilter").innerHTML = "Rock Songs:";
+					$("#gPop").hide();
+					$("#gRock").show();
+					$("#gDance").hide();
+                    $("#gAlternative").hide();
+					$("#gIndie").hide();
 				}
-				else if($('select[name="genres"]').val() == "disco")
+				else if($('select[name="genres"]').val() == "dance")
 				{
-					$("#genreSoul").hide();
-					$("#genreRock").hide();
-					$("#genreDisco").show();
+                    document.getElementById("titleFilter").innerHTML = "Dance Songs:";
+					$("#gPop").hide();
+					$("#gRock").hide();
+					$("#gDance").show();
+                    $("#gAlternative").hide();
+					$("#gIndie").hide();
+				}
+                else if($('select[name="genres"]').val() == "alternative")
+				{
+                    document.getElementById("titleFilter").innerHTML = "Alternative Songs:";
+					$("#gPop").hide();
+					$("#gRock").hide();
+					$("#gDance").hide();
+                    $("#gAlternative").show();
+					$("#gIndie").hide();
+				}
+                else if($('select[name="genres"]').val() == "indie")
+				{
+                    document.getElementById("titleFilter").innerHTML = "Indie Songs:";
+					$("#gPop").hide();
+					$("#gRock").hide();
+					$("#gDance").hide();
+                    $("#gAlternative").hide();
+					$("#gIndie").show();
 				}
 				else
 				{
@@ -138,7 +255,7 @@
 				}
 			});
 		}
-	</script> -->
+	</script> 
 </body>
 </html>
 	
