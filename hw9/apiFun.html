@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Sports API </title>
+	<style type="text/css">
+		div, h1, p
+		{
+			font-family: Georgia, 'Times New Roman', Times, serif;
+		}
+		div
+		{
+			font-size:12px;
+        }
+        h2 {
+            color: rgb(229, 216, 160);
+            padding-bottom: 0px;
+        }
+        p {
+            margin-bottom: 25px;
+        }
+		h1
+		{
+            color: rgb(229, 216, 160);
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        body {
+            padding: 5%;
+            background-color:rgb(107, 81, 48);
+        }
+        
+	</style>
+	<meta charset="utf-8"/>
+	<script>
+		function loadData() 
+		{
+			/* Step 1: Make instance of XHR object...
+			...to make HTTP request after page is loaded*/
+			request = new XMLHttpRequest();
+			console.log("1: created request");
+ 
+		    // Step 2: Open the JSON file at remote location
+ 
+			request.open("GET", "https://www.thesportsdb.com/api/v1/json/1/all_sports.php", true);
+			console.log("2: open success");
+ 	
+            // Step 3: set up callback 
+
+			request.onreadystatechange = function() 
+            {
+				console.log("3:  event fired");
+
+				if (request.readyState == 4 && request.status == 200) {
+
+					// Step 5: when we get all the JSON data back, parse it and use it
+					console.log("5:  data is ready");
+					myData = request.responseText;
+                    alert(myData);
+					sportss = JSON.parse(myData);
+					
+					
+					returnHTML = "";
+					for (var i = 0; i < sportss.sports.length; i++)
+					{
+                     
+                        returnHTML += "<h2>"+ sportss.sports[i].strSport + "</h2><p> Type of Sport: " + sportss.sports[i].strFormat + "</p>";
+                        
+                    }
+
+                    document.getElementById("data").innerHTML = returnHTML;
+				}
+				else if (request.readyState == 4 && request.status != 200) {
+
+					document.getElementById("messages").innerHTML = "Whoops, something went terribly wrong!";
+
+				} else if (request.readyState == 3) {
+
+                    console.log("6:  ready state 3- request received,data being sent");
+                    document.getElementById("messages").innerHTML = "Come back soon!";
+
+                }
+            }
+		// Step 4: fire off the HTTP request
+			request.send();
+			console.log("4 request sent");
+		}
+				
+	
+    </script>
+    
+</head>
+
+
+<body onload="loadData()">
+
+	<h1>All the different types of Sports</h1>
+    <div id="data">Loading...</div>
+    
+    <h2 style="text-align: center;"> Answers to questions: </h2>
+    <div>
+        1. The API selected gives a list of sports, and information for each 
+        sport such as what type of sport it is and the overall description of the sport
+    </div>
+    <div>
+        2. Citation: https://www.thesportsdb.com/api.php
+    </div>
+    <div>
+        3. I chose the name of the sport (strSport) and the type of the sport (strFormat)
+    </div>
+    <div>
+        4. This API would be helpful for educational purposes, like in a site for people to learn
+        more about the different sports and the description for each sport <br>
+        It could also be helpful for game events in a sports app that includes
+        different games for different sports 
+    </div>
+
+</body>
+</html>
+
