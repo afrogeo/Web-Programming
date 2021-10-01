@@ -1,0 +1,22 @@
+{
+    "name": "hw12",
+    "version": "1.0.0",
+    "description": "node app",
+    "main": "form.js",
+    "scripts": {
+        "start": "node form.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": ""
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": ""
+    },
+    "homepage": "",
+    "dependencies": {
+        "mongodb": "*"
+    }
+}
